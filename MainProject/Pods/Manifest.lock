@@ -1,26 +1,196 @@
 PODS:
+  - ActiveLabel (1.1.0)
+  - Alamofire (5.6.1)
+  - HandyJSON (5.0.2)
+  - JTAppleCalendar (8.0.3)
+  - JXSegmentedView (1.3.0)
+  - Kingfisher (7.0.0)
+  - KingfisherWebP (1.4.0):
+    - Kingfisher (~> 7.0)
+    - libwebp (>= 1.1.0)
+  - libwebp (1.2.1):
+    - libwebp/demux (= 1.2.1)
+    - libwebp/mux (= 1.2.1)
+    - libwebp/webp (= 1.2.1)
+  - libwebp/demux (1.2.1):
+    - libwebp/webp
+  - libwebp/mux (1.2.1):
+    - libwebp/demux
+  - libwebp/webp (1.2.1)
+  - MikCore (0.1.0):
+    - MikCore/MikFoundation (= 0.1.0)
+    - MikCore/MikKit (= 0.1.0)
+  - MikCore/MikFoundation (0.1.0):
+    - MikCore/MikFoundation/MikLogger (= 0.1.0)
+    - MikCore/MikFoundation/MikMedia (= 0.1.0)
+    - MikCore/MikFoundation/MikNetWork (= 0.1.0)
+    - MikCore/MikFoundation/MikValidateRegex (= 0.1.0)
+    - MikCore/MikFoundation/NameSpace (= 0.1.0)
+  - MikCore/MikFoundation/MikLogger (0.1.0):
+    - HandyJSON (~> 5.0.2)
+    - MikCore/MikFoundation/NameSpace
+    - MikCore/MikKit/MikToast
+    - SwiftyJSON (~> 5.0.1)
+  - MikCore/MikFoundation/MikMedia (0.1.0):
+    - MikCore/MikFoundation/MikLogger
+    - MikCore/MikFoundation/NameSpace
+    - ZLPhotoBrowser (~> 4.3.0)
+  - MikCore/MikFoundation/MikNetWork (0.1.0):
+    - Alamofire (~> 5.6.1)
+    - HandyJSON (~> 5.0.2)
+    - MikCore/MikFoundation/MikLogger
+    - MikCore/MikFoundation/NameSpace
+    - RxCocoa (~> 6.2.0)
+    - RxSwift (~> 6.2.0)
+  - MikCore/MikFoundation/MikValidateRegex (0.1.0)
+  - MikCore/MikFoundation/NameSpace (0.1.0):
+    - Kingfisher (~> 7.0.0)
+    - KingfisherWebP (~> 1.4.0)
+  - MikCore/MikKit (0.1.0):
+    - MikCore/MikKit/MikAlertView (= 0.1.0)
+    - MikCore/MikKit/MikBaseViewController (= 0.1.0)
+    - MikCore/MikKit/MikBottomPopController (= 0.1.0)
+    - MikCore/MikKit/MikCalendarView (= 0.1.0)
+    - MikCore/MikKit/MikDotProgressView (= 0.1.0)
+    - MikCore/MikKit/MikGrowTextView (= 0.1.0)
+    - MikCore/MikKit/MikImageView (= 0.1.0)
+    - MikCore/MikKit/MikNavigationController (= 0.1.0)
+    - MikCore/MikKit/MikNumberControl (= 0.1.0)
+    - MikCore/MikKit/MikPickerView (= 0.1.0)
+    - MikCore/MikKit/MikPopoverView (= 0.1.0)
+    - MikCore/MikKit/MikPullToRefresh (= 0.1.0)
+    - MikCore/MikKit/MikSegmentedView (= 0.1.0)
+    - MikCore/MikKit/MikStarView (= 0.1.0)
+    - MikCore/MikKit/MikSwitch (= 0.1.0)
+    - MikCore/MikKit/MikTextField (= 0.1.0)
+    - MikCore/MikKit/MikToast (= 0.1.0)
+  - MikCore/MikKit/MikAlertView (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - RxCocoa (~> 6.2.0)
+    - RxSwift (~> 6.2.0)
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikBaseViewController (0.1.0):
+    - MikCore/MikFoundation/MikLogger
+    - MikCore/MikFoundation/NameSpace
+  - MikCore/MikKit/MikBottomPopController (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - MikCore/MikKit/MikNavigationController
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikCalendarView (0.1.0):
+    - JTAppleCalendar (~> 8.0.3)
+    - MikCore/MikFoundation/NameSpace
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikDotProgressView (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikGrowTextView (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikImageView (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikNavigationController (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - RxCocoa (~> 6.2.0)
+    - RxSwift (~> 6.2.0)
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikNumberControl (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikPickerView (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - MikCore/MikKit/MikBottomPopController
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikPopoverView (0.1.0):
+    - ActiveLabel (~> 1.1.0)
+    - MikCore/MikFoundation/NameSpace
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikPullToRefresh (0.1.0):
+    - Kingfisher (= 7.0.0)
+    - MikCore/MikFoundation/NameSpace
+    - MJRefresh (= 3.7.5)
+  - MikCore/MikKit/MikSegmentedView (0.1.0):
+    - JXSegmentedView (~> 1.3.0)
+    - MikCore/MikFoundation/NameSpace
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikStarView (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - RxCocoa (~> 6.2.0)
+    - RxSwift (~> 6.2.0)
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikSwitch (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikTextField (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - RxCocoa (~> 6.2.0)
+    - RxSwift (~> 6.2.0)
+    - SnapKit (~> 5.6.0)
+  - MikCore/MikKit/MikToast (0.1.0):
+    - MikCore/MikFoundation/NameSpace
+    - SnapKit (~> 5.6.0)
+  - MJRefresh (3.7.5)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
     - RxSwift (= 6.2.0)
   - RxRelay (6.2.0):
     - RxSwift (= 6.2.0)
   - RxSwift (6.2.0)
+  - SnapKit (5.6.0)
+  - SwiftyJSON (5.0.1)
+  - ZLPhotoBrowser (4.3.1):
+    - ZLPhotoBrowser/Core (= 4.3.1)
+  - ZLPhotoBrowser/Core (4.3.1)
 
 DEPENDENCIES:
-  - RxCocoa (= 6.2.0)
-  - RxSwift (= 6.2.0)
+  - MikCore (from `https://github.com/1070824493/MikCore.git`, branch `master`)
 
 SPEC REPOS:
   trunk:
+    - ActiveLabel
+    - Alamofire
+    - HandyJSON
+    - JTAppleCalendar
+    - JXSegmentedView
+    - Kingfisher
+    - KingfisherWebP
+    - libwebp
+    - MJRefresh
     - RxCocoa
     - RxRelay
     - RxSwift
+    - SnapKit
+    - SwiftyJSON
+    - ZLPhotoBrowser
+
+EXTERNAL SOURCES:
+  MikCore:
+    :branch: master
+    :git: https://github.com/1070824493/MikCore.git
+
+CHECKOUT OPTIONS:
+  MikCore:
+    :commit: 41f0d6911172422e149ec64c20c1bad19b46ebeb
+    :git: https://github.com/1070824493/MikCore.git
 
 SPEC CHECKSUMS:
+  ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
+  Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
+  JTAppleCalendar: 932cadea40b1051beab10f67843451d48ba16c99
+  JXSegmentedView: fec0d335355b6e019c494fe2e030bde8a36d2df6
+  Kingfisher: 5efc54fec3980f92354898532e562cc17f31efb4
+  KingfisherWebP: f4b76064c50a36c4cadd37548496ecebfdcb39e8
+  libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
+  MikCore: 573d82735b7b7bc5b1537da0130c24cc1025fdbe
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  ZLPhotoBrowser: bfe560c5c244dffffd2a1902a92937ce0f840510
 
-PODFILE CHECKSUM: 10ad35e1d3f183da38ad640cd08e98ad5e4a0506
+PODFILE CHECKSUM: 03c0bdb34645236c230a5d5f0f417d522b569c0e
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

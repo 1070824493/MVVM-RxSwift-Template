@@ -11,5 +11,4 @@ public protocol LoginRouterable: Routerable {
 
     func gotoLogin(showInVC: UIViewController, email: String?, completion:(() -> Void)?)
 
-    func logout()
 }

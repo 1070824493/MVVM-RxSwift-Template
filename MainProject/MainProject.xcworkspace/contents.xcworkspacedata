@@ -5,7 +5,13 @@
       location = "group:MainProject.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:LoginModule/LoginModule.xcodeproj">
+      location = "group:ModuleResource/ModuleResource.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ModuleFoundation/ModuleFoundation.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ModuleLogin/ModuleLogin.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Router/Router.xcodeproj">
