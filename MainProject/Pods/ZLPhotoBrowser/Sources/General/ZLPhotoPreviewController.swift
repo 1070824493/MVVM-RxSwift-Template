@@ -51,7 +51,7 @@ class ZLPhotoPreviewController: UIViewController {
     
     var backBtn: UIButton!
     
-    var selectBtn: ZLEnlargeButton!
+    var selectBtn: UIButton!
     
     var indexLabel: UILabel!
     
@@ -82,11 +82,11 @@ class ZLPhotoPreviewController: UIViewController {
     var orientation: UIInterfaceOrientation = .unknown
     
     override var prefersStatusBarHidden: Bool {
-        return !ZLPhotoUIConfiguration.default().showStatusBarInPreviewInterface
+        return !ZLPhotoConfiguration.default().showStatusBarInPreviewInterface
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return ZLPhotoUIConfiguration.default().statusBarStyle
+        return ZLPhotoConfiguration.default().statusBarStyle
     }
     
     deinit {
@@ -205,7 +205,7 @@ class ZLPhotoPreviewController: UIViewController {
         
         let selCount = (self.navigationController as? ZLImageNavController)?.arrSelectedModels.count ?? 0
         var doneTitle = localLanguageTextValue(.done)
-        if ZLPhotoConfiguration.default().showSelectCountOnDoneBtn, selCount > 0 {
+        if selCount > 0 {
             doneTitle += "(" + String(selCount) + ")"
         }
         let doneBtnW = doneTitle.boundingRect(font: ZLLayout.bottomToolTitleFont, limitSize: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 30)).width + 20
@@ -213,7 +213,7 @@ class ZLPhotoPreviewController: UIViewController {
     }
     
     func setupUI() {
-        self.view.backgroundColor = .previewVCBgColor
+        self.view.backgroundColor = .black
         self.automaticallyAdjustsScrollViewInsets = false
         
         let config = ZLPhotoConfiguration.default()
@@ -222,7 +222,7 @@ class ZLPhotoPreviewController: UIViewController {
         self.navView.backgroundColor = .navBarColorOfPreviewVC
         self.view.addSubview(self.navView)
         
-        if let effect = ZLPhotoUIConfiguration.default().navViewBlurEffectOfPreview {
+        if let effect = config.navViewBlurEffectOfPreview {
             self.navBlurView = UIVisualEffectView(effect: effect)
             self.navView.addSubview(self.navBlurView!)
         }
@@ -233,10 +233,10 @@ class ZLPhotoPreviewController: UIViewController {
         self.backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
         self.navView.addSubview(self.backBtn)
         
-        self.selectBtn = ZLEnlargeButton(type: .custom)
+        self.selectBtn = UIButton(type: .custom)
         self.selectBtn.setImage(getImage("zl_btn_circle"), for: .normal)
         self.selectBtn.setImage(getImage("zl_btn_selected"), for: .selected)
-        self.selectBtn.enlargeInset = 10
+        self.selectBtn.zl_enlargeValidTouchArea(inset: 10)
         self.selectBtn.addTarget(self, action: #selector(selectBtnClick), for: .touchUpInside)
         self.navView.addSubview(self.selectBtn)
         
@@ -272,14 +272,14 @@ class ZLPhotoPreviewController: UIViewController {
         self.bottomView.backgroundColor = .bottomToolViewBgColorOfPreviewVC
         self.view.addSubview(self.bottomView)
         
-        if let effect = ZLPhotoUIConfiguration.default().bottomViewBlurEffectOfPreview {
+        if let effect = config.bottomViewBlurEffectOfPreview {
             self.bottomBlurView = UIVisualEffectView(effect: effect)
             self.bottomView.addSubview(self.bottomBlurView!)
         }
         
         if config.showSelectedPhotoPreview {
-            let selModels = (navigationController as? ZLImageNavController)?.arrSelectedModels ?? []
-            self.selPhotoPreview = ZLPhotoPreviewSelectedView(selModels: selModels, currentShowModel: self.arrDataSources[self.currentIndex])
+            let nav = self.navigationController as! ZLImageNavController
+            self.selPhotoPreview = ZLPhotoPreviewSelectedView(selModels: nav.arrSelectedModels, currentShowModel: self.arrDataSources[self.currentIndex])
             self.selPhotoPreview?.selectBlock = { [weak self] (model) in
                 self?.scrollToSelPreviewCell(model)
             }
@@ -289,12 +289,12 @@ class ZLPhotoPreviewController: UIViewController {
             self.bottomView.addSubview(self.selPhotoPreview!)
         }
         
-        func createBtn(_ title: String, _ action: Selector, _ isDone: Bool = false) -> UIButton {
+        func createBtn(_ title: String, _ action: Selector) -> UIButton {
             let btn = UIButton(type: .custom)
             btn.titleLabel?.font = ZLLayout.bottomToolTitleFont
             btn.setTitle(title, for: .normal)
-            btn.setTitleColor(isDone ? .bottomToolViewDoneBtnNormalTitleColorOfPreviewVC : .bottomToolViewBtnNormalTitleColorOfPreviewVC, for: .normal)
-            btn.setTitleColor(isDone ? .bottomToolViewDoneBtnDisableTitleColorOfPreviewVC : .bottomToolViewBtnDisableTitleColorOfPreviewVC, for: .disabled)
+            btn.setTitleColor(.bottomToolViewBtnNormalTitleColorOfPreviewVC, for: .normal)
+            btn.setTitleColor(.bottomToolViewBtnDisableTitleColorOfPreviewVC, for: .disabled)
             btn.addTarget(self, action: action, for: .touchUpInside)
             return btn
         }
@@ -316,10 +316,10 @@ class ZLPhotoPreviewController: UIViewController {
         self.originalBtn.adjustsImageWhenHighlighted = false
         self.originalBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         self.originalBtn.isHidden = !(config.allowSelectOriginal && config.allowSelectImage)
-        self.originalBtn.isSelected = (self.navigationController as? ZLImageNavController)?.isSelectedOriginal ?? false
+        self.originalBtn.isSelected = (self.navigationController as! ZLImageNavController).isSelectedOriginal
         self.bottomView.addSubview(self.originalBtn)
         
-        self.doneBtn = createBtn(localLanguageTextValue(.done), #selector(doneBtnClick), true)
+        self.doneBtn = createBtn(localLanguageTextValue(.done), #selector(doneBtnClick))
         self.doneBtn.backgroundColor = .bottomToolViewBtnNormalBgColorOfPreviewVC
         self.doneBtn.layer.masksToBounds = true
         self.doneBtn.layer.cornerRadius = ZLLayout.bottomToolBtnCornerRadius
@@ -379,10 +379,7 @@ class ZLPhotoPreviewController: UIViewController {
     }
     
     func resetSubViewStatus() {
-        guard let nav = navigationController as? ZLImageNavController else {
-            zlLoggerInDebug("Navigation controller is null")
-            return
-        }
+        let nav = self.navigationController as! ZLImageNavController
         let config = ZLPhotoConfiguration.default()
         let currentModel = self.arrDataSources[self.currentIndex]
         
@@ -401,8 +398,7 @@ class ZLPhotoPreviewController: UIViewController {
         }
         let selCount = nav.arrSelectedModels.count
         var doneTitle = localLanguageTextValue(.done)
-        if ZLPhotoConfiguration.default().showSelectCountOnDoneBtn,
-           selCount > 0 {
+        if selCount > 0 {
             doneTitle += "(" + String(selCount) + ")"
         }
         self.doneBtn.setTitle(doneTitle, for: .normal)
@@ -428,18 +424,15 @@ class ZLPhotoPreviewController: UIViewController {
     
     func resetIndexLabelStatus() {
         guard ZLPhotoConfiguration.default().showSelectedIndex else {
-            indexLabel.isHidden = true
+            self.indexLabel.isHidden = true
             return
         }
-        guard let nav = navigationController as? ZLImageNavController else {
-            zlLoggerInDebug("Navigation controller is null")
-            return
-        }
+        let nav = self.navigationController as! ZLImageNavController
         if let index = nav.arrSelectedModels.firstIndex(where: { $0 == self.arrDataSources[self.currentIndex] }) {
-            indexLabel.isHidden = false
-            indexLabel.text = String(index + 1)
+            self.indexLabel.isHidden = false
+            self.indexLabel.text = String(index + 1)
         } else {
-            indexLabel.isHidden = true
+            self.indexLabel.isHidden = true
         }
     }
     
@@ -454,28 +447,25 @@ class ZLPhotoPreviewController: UIViewController {
     }
     
     @objc func selectBtnClick() {
-        guard let nav = navigationController as? ZLImageNavController else {
-            zlLoggerInDebug("Navigation controller is null")
-            return
-        }
-        let currentModel = arrDataSources[currentIndex]
-        selectBtn.layer.removeAllAnimations()
+        let nav = self.navigationController as! ZLImageNavController
+        let currentModel = self.arrDataSources[self.currentIndex]
+        self.selectBtn.layer.removeAllAnimations()
         if currentModel.isSelected {
             currentModel.isSelected = false
             nav.arrSelectedModels.removeAll { $0 == currentModel }
-            selPhotoPreview?.removeSelModel(model: currentModel)
+            self.selPhotoPreview?.removeSelModel(model: currentModel)
         } else {
             if ZLPhotoConfiguration.default().animateSelectBtnWhenSelect {
-                selectBtn.layer.add(getSpringAnimation(), forKey: nil)
+                self.selectBtn.layer.add(getSpringAnimation(), forKey: nil)
             }
             if !canAddModel(currentModel, currentSelectCount: nav.arrSelectedModels.count, sender: self) {
                 return
             }
             currentModel.isSelected = true
             nav.arrSelectedModels.append(currentModel)
-            selPhotoPreview?.addSelModel(model: currentModel)
+            self.selPhotoPreview?.addSelModel(model: currentModel)
         }
-        resetSubViewStatus()
+        self.resetSubViewStatus()
     }
     
     @objc func editBtnClick() {
@@ -517,59 +507,28 @@ class ZLPhotoPreviewController: UIViewController {
     }
     
     @objc func originalPhotoClick() {
-        originalBtn.isSelected.toggle()
-        
-        let config = ZLPhotoConfiguration.default()
-        
-        let nav = (navigationController as? ZLImageNavController)
-        nav?.isSelectedOriginal = originalBtn.isSelected
+        self.originalBtn.isSelected = !self.originalBtn.isSelected
+        let nav = (self.navigationController as? ZLImageNavController)
+        nav?.isSelectedOriginal = self.originalBtn.isSelected
         if nav?.arrSelectedModels.count == 0 {
-            selectBtnClick()
-        } else if config.maxSelectCount == 1,
-                  !config.showSelectBtnWhenSingleSelect,
-                  !originalBtn.isSelected,
-                  nav?.arrSelectedModels.count == 1,
-                  let currentModel = nav?.arrSelectedModels.first {
-            currentModel.isSelected = false
-            currentModel.editImage = nil
-            currentModel.editImageModel = nil
-            nav?.arrSelectedModels.removeAll { $0 == currentModel }
-            selPhotoPreview?.removeSelModel(model: currentModel)
-            resetSubViewStatus()
-            let index = config.sortAscending ? arrDataSources.lastIndex { $0 == currentModel } : arrDataSources.firstIndex { $0 == currentModel }
-            if let index = index {
-                collectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
-            }
+            self.selectBtnClick()
         }
     }
     
     @objc func doneBtnClick() {
-        guard let nav = navigationController as? ZLImageNavController else {
-            zlLoggerInDebug("Navigation controller is null")
-            return
-        }
+        let nav = self.navigationController as! ZLImageNavController
+        let currentModel = self.arrDataSources[self.currentIndex]
         
-        func callBackBeforeDone() {
-            if let block = ZLPhotoConfiguration.default().operateBeforeDoneAction {
-                block(self, { [weak nav] in
-                    nav?.selectImageBlock?()
-                })
-            } else {
-                nav.selectImageBlock?()
-            }
-        }
-        
-        let currentModel = arrDataSources[currentIndex]
-        if autoSelectCurrentIfNotSelectAnyone {
+        if self.autoSelectCurrentIfNotSelectAnyone {
             if nav.arrSelectedModels.isEmpty, canAddModel(currentModel, currentSelectCount: nav.arrSelectedModels.count, sender: self) {
                 nav.arrSelectedModels.append(currentModel)
             }
             
             if !nav.arrSelectedModels.isEmpty {
-                callBackBeforeDone()
+                nav.selectImageBlock?()
             }
         } else {
-            callBackBeforeDone()
+            nav.selectImageBlock?()
         }
     }
     
@@ -586,13 +545,13 @@ class ZLPhotoPreviewController: UIViewController {
     }
     
     func refreshCurrentCellIndex(_ models: [ZLPhotoModel]) {
-        let nav = navigationController as? ZLImageNavController
+        let nav = self.navigationController as? ZLImageNavController
         nav?.arrSelectedModels.removeAll()
         nav?.arrSelectedModels.append(contentsOf: models)
         guard ZLPhotoConfiguration.default().showSelectedIndex else {
             return
         }
-        resetIndexLabelStatus()
+        self.resetIndexLabelStatus()
     }
     
     func tapPreviewCell() {
@@ -608,8 +567,8 @@ class ZLPhotoPreviewController: UIViewController {
     }
     
     func showEditImageVC(image: UIImage) {
-        let model = arrDataSources[currentIndex]
-        let nav = navigationController as? ZLImageNavController
+        let model = self.arrDataSources[self.currentIndex]
+        let nav = self.navigationController as! ZLImageNavController
         ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: model.editImageModel) { [weak self, weak nav] (ei, editImageModel) in
             guard let `self` = self else { return }
             model.editImage = ei
@@ -627,7 +586,7 @@ class ZLPhotoPreviewController: UIViewController {
     }
     
     func showEditVideoVC(model: ZLPhotoModel, avAsset: AVAsset) {
-        let nav = navigationController as? ZLImageNavController
+        let nav = self.navigationController as! ZLImageNavController
         let vc = ZLEditVideoViewController(avAsset: avAsset)
         vc.modalPresentationStyle = .fullScreen
         
@@ -650,7 +609,7 @@ class ZLPhotoPreviewController: UIViewController {
             }
         }
         
-        present(vc, animated: false, completion: nil)
+        self.present(vc, animated: false, completion: nil)
     }
     
 }

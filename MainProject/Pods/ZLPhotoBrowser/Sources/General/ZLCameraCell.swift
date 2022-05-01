@@ -83,7 +83,7 @@ class ZLCameraCell: UICollectionViewCell {
         if status == .notDetermined {
             AVCaptureDevice.requestAccess(for: .video) { (granted) in
                 if granted {
-                    ZLMainAsync {
+                    DispatchQueue.main.async {
                         self.setupSession()
                     }
                 }

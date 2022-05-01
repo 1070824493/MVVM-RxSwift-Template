@@ -53,7 +53,7 @@
           "source_files": "MikCore/Classes/MikFoundation/MikMedia/**/*",
           "dependencies": {
             "ZLPhotoBrowser": [
-              "~> 4.3.0"
+              "~> 4.1.7"
             ],
             "MikCore/MikFoundation/NameSpace": [
 

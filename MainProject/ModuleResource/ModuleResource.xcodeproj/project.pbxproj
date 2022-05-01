@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4199704C393EE54E0DBE63E1 /* Pods_ModuleResource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8BD0A9EAE9BF376DC864D5 /* Pods_ModuleResource.framework */; };
 		CE884AC627FEAC4A00F3A4FC /* ModuleResource.h in Headers */ = {isa = PBXBuildFile; fileRef = CE884AC527FEAC4A00F3A4FC /* ModuleResource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEE53556281E851A008C08D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE53555281E851A008C08D7 /* Assets.xcassets */; };
+		CEE53559281E8663008C08D7 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE53558281E8663008C08D7 /* R.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +18,8 @@
 		5D8BD0A9EAE9BF376DC864D5 /* Pods_ModuleResource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModuleResource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE884AC227FEAC4A00F3A4FC /* ModuleResource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ModuleResource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE884AC527FEAC4A00F3A4FC /* ModuleResource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModuleResource.h; sourceTree = "<group>"; };
+		CEE53555281E851A008C08D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEE53558281E8663008C08D7 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		DF6D3184121A294D200CD1C6 /* Pods-ModuleResource.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModuleResource.debug.xcconfig"; path = "Target Support Files/Pods-ModuleResource/Pods-ModuleResource.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,7 +74,9 @@
 		CE884AC427FEAC4A00F3A4FC /* ModuleResource */ = {
 			isa = PBXGroup;
 			children = (
+				CEE53558281E8663008C08D7 /* R.generated.swift */,
 				CE884AC527FEAC4A00F3A4FC /* ModuleResource.h */,
+				CEE53555281E851A008C08D7 /* Assets.xcassets */,
 			);
 			path = ModuleResource;
 			sourceTree = "<group>";
@@ -95,6 +101,7 @@
 			buildPhases = (
 				C67DF36D78C20AAEC7FA116E /* [CP] Check Pods Manifest.lock */,
 				CE884ABD27FEAC4A00F3A4FC /* Headers */,
+				CEE53557281E8556008C08D7 /* R.swift */,
 				CE884ABE27FEAC4A00F3A4FC /* Sources */,
 				CE884ABF27FEAC4A00F3A4FC /* Frameworks */,
 				CE884AC027FEAC4A00F3A4FC /* Resources */,
@@ -119,6 +126,7 @@
 				TargetAttributes = {
 					CE884AC127FEAC4A00F3A4FC = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
 					};
 				};
 			};
@@ -145,6 +153,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE53556281E851A008C08D7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +182,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CEE53557281E8556008C08D7 /* R.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = R.swift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/ModuleResource/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate --accessLevel public \"$SRCROOT/ModuleResource/R.generated.swift\"\n\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -180,6 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE53559281E8663008C08D7 /* R.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +268,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -296,7 +326,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -312,6 +342,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DF6D3184121A294D200CD1C6 /* Pods-ModuleResource.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -322,6 +353,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,6 +364,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -341,6 +374,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 48E18A4FA8B1F404B47B6D75 /* Pods-ModuleResource.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -351,6 +385,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

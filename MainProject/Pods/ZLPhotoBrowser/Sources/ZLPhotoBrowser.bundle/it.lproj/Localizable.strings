@@ -11,14 +11,11 @@
 "back" = "Indietro";
 "edit" = "Modifica";
 "revert" = "Annulla";
-"brightness" = "Luminosità";
-"contrast" = "Contrasto";
-"saturation" = "Saturazione";
 
 "photo" = "Fotografie";
 "preview" = "Anteprima";
 
-"noPhotoTips" = "Niente fotos";
+"noPhotoTips" = "Niente foto";
 "notAllowMixSelect" = "Impossibile selezionare il video";
 
 "loading" = "Caricamento, in attesa per favore";

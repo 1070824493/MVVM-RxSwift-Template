@@ -29,7 +29,7 @@ import Photos
 
 public class ZLEditVideoViewController: UIViewController {
 
-    static let frameImageSize = CGSize(width: CGFloat(round(50.0 * 2.0 / 3.0)), height: 50.0)
+    static let frameImageSize = CGSize(width: 50.0 * 2.0 / 3.0, height: 50.0)
     
     let avAsset: AVAsset
     
@@ -191,7 +191,6 @@ public class ZLEditVideoViewController: UIViewController {
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        self.collectionView.backgroundColor = .clear
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.showsHorizontalScrollIndicator = false
@@ -433,7 +432,7 @@ public class ZLEditVideoViewController: UIViewController {
             self.dismiss(animated: false, completion: nil)
         }
         alert.addAction(action)
-        showAlertController(alert)
+        self.showDetailViewController(alert, sender: nil)
     }
     
 }
@@ -641,7 +640,7 @@ class ZLEditVideoFetchFrameImageOperation: Operation {
         self.generator.generateCGImagesAsynchronously(forTimes: [NSValue(time: self.time)]) { (_, cgImage, _, result, error) in
             if result == .succeeded, let cg = cgImage {
                 let image = UIImage(cgImage: cg)
-                ZLMainAsync {
+                DispatchQueue.main.async {
                     self.completion(image, self.time)
                 }
                 self.fetchFinish()

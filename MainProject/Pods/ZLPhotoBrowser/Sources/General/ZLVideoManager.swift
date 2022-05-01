@@ -114,7 +114,7 @@ public class ZLVideoManager: NSObject {
                 if exportSession.status == .failed {
                     zl_debugPrint("ZLPhotoBrowser: video merge failed:  \(exportSession.error?.localizedDescription ?? "")")
                 }
-                ZLMainAsync {
+                DispatchQueue.main.async {
                     completion(suc ? outputUrl : nil, exportSession.error)
                 }
             })
@@ -181,7 +181,7 @@ extension ZLVideoManager {
             if exportSession.status == .failed {
                 zl_debugPrint("ZLPhotoBrowser: video export failed: \(exportSession.error?.localizedDescription ?? "")")
             }
-            ZLMainAsync {
+            DispatchQueue.main.async {
                 complete(suc ? outputUrl : nil, exportSession.error)
             }
         })

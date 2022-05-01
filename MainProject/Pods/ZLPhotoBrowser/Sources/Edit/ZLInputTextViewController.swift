@@ -65,11 +65,10 @@ class ZLInputTextViewController: UIViewController {
         if let _ = textColor {
             self.currentTextColor = textColor!
         } else {
-            let editConfig = ZLPhotoConfiguration.default().editImageConfiguration
-            if !editConfig.textStickerTextColors.contains(editConfig.textStickerDefaultTextColor) {
-                self.currentTextColor = editConfig.textStickerTextColors.first!
+            if !ZLPhotoConfiguration.default().textStickerTextColors.contains(ZLPhotoConfiguration.default().textStickerDefaultTextColor) {
+                self.currentTextColor = ZLPhotoConfiguration.default().textStickerTextColors.first!
             } else {
-                self.currentTextColor = editConfig.textStickerDefaultTextColor
+                self.currentTextColor = ZLPhotoConfiguration.default().textStickerDefaultTextColor
             }
         }
         super.init(nibName: nil, bundle: nil)
@@ -109,7 +108,7 @@ class ZLInputTextViewController: UIViewController {
         
         self.textView.frame = CGRect(x: 20, y: cancelBtn.frame.maxY + 20, width: view.bounds.width - 40, height: 150)
         
-        if let index = ZLPhotoConfiguration.default().editImageConfiguration.textStickerTextColors.firstIndex(where: { $0 == self.currentTextColor}) {
+        if let index = ZLPhotoConfiguration.default().textStickerTextColors.firstIndex(where: { $0 == self.currentTextColor}) {
             self.collectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: false)
         }
     }
@@ -191,13 +190,13 @@ class ZLInputTextViewController: UIViewController {
 extension ZLInputTextViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ZLPhotoConfiguration.default().editImageConfiguration.textStickerTextColors.count
+        return ZLPhotoConfiguration.default().textStickerTextColors.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZLDrawColorCell.zl_identifier(), for: indexPath) as! ZLDrawColorCell
         
-        let c = ZLPhotoConfiguration.default().editImageConfiguration.textStickerTextColors[indexPath.row]
+        let c = ZLPhotoConfiguration.default().textStickerTextColors[indexPath.row]
         cell.color = c
         if c == self.currentTextColor {
             cell.bgWhiteView.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1)
@@ -209,7 +208,7 @@ extension ZLInputTextViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.currentTextColor = ZLPhotoConfiguration.default().editImageConfiguration.textStickerTextColors[indexPath.row]
+        self.currentTextColor = ZLPhotoConfiguration.default().textStickerTextColors[indexPath.row]
         self.textView.textColor = self.currentTextColor
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         collectionView.reloadData()

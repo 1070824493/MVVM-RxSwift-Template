@@ -84,7 +84,7 @@ class ZLEmbedAlbumListView: UIView {
     func setupUI() {
         self.clipsToBounds = true
         
-        self.backgroundColor = .embedAlbumListTranslucentColor
+        self.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         
         self.tableBgView = UIView()
         self.addSubview(self.tableBgView)
@@ -112,7 +112,7 @@ class ZLEmbedAlbumListView: UIView {
                 self?.arrDataSource.removeAll()
                 self?.arrDataSource.append(contentsOf: albumList)
                 
-                ZLMainAsync {
+                DispatchQueue.main.async {
                     completion?()
                     self?.tableView.reloadData()
                 }

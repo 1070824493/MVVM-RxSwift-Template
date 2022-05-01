@@ -75,10 +75,7 @@ public class ZLAlbumListModel: NSObject {
     
 }
 
-extension ZLAlbumListModel {
-    
-    static func ==(lhs: ZLAlbumListModel, rhs: ZLAlbumListModel) -> Bool {
-        return lhs.title == rhs.title && lhs.count == rhs.count && lhs.headImageAsset?.localIdentifier == rhs.headImageAsset?.localIdentifier
-    }
-    
+
+func ==(lhs: ZLAlbumListModel, rhs: ZLAlbumListModel) -> Bool {
+    return lhs.title == rhs.title && lhs.count == rhs.count && lhs.headImageAsset?.localIdentifier == rhs.headImageAsset?.localIdentifier
 }

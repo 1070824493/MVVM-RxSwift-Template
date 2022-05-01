@@ -5,7 +5,7 @@
 //  Created by ty on 2022/3/5.
 //
 
-import Foundation
+import UIKit
 
 public protocol LoginRouterable: Routerable {
 

@@ -53,11 +53,8 @@ func zlRGB(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat) -> UIColor {
 }
 
 func getImage(_ named: String) -> UIImage? {
-    if ZLCustomImageDeploy.imageNames.contains(named), let image = UIImage(named: named) {
-        return image
-    }
-    if let image = ZLCustomImageDeploy.imageForKey[named] {
-        return image
+    if ZLCustomImageDeploy.deploy.contains(named) {
+        return UIImage(named: named)
     }
     return UIImage(named: named, in: Bundle.zlPhotoBrowserBundle, compatibleWith: nil)
 }
@@ -113,11 +110,11 @@ func getAppName() -> String {
 }
 
 func deviceIsiPhone() -> Bool {
-    return UIDevice.current.userInterfaceIdiom == .phone
+    return UI_USER_INTERFACE_IDIOM() == .phone
 }
 
 func deviceIsiPad() -> Bool {
-    return UIDevice.current.userInterfaceIdiom == .pad
+    return UI_USER_INTERFACE_IDIOM() == .pad
 }
 
 func deviceSafeAreaInsets() -> UIEdgeInsets {
@@ -143,16 +140,6 @@ func getSpringAnimation() -> CAKeyframeAnimation {
     return animate
 }
 
-func getFadeAnimation(fromValue: CGFloat, toValue: CGFloat, duration: TimeInterval) -> CAAnimation {
-    let animation = CABasicAnimation(keyPath: "opacity")
-    animation.fromValue = fromValue
-    animation.toValue = toValue
-    animation.duration = duration
-    animation.fillMode = .forwards
-    animation.isRemovedOnCompletion = false
-    return animation
-}
-
 func showAlertView(_ message: String, _ sender: UIViewController?) {
     let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
     let action = UIAlertAction(title: localLanguageTextValue(.ok), style: .default, handler: nil)
@@ -160,7 +147,7 @@ func showAlertView(_ message: String, _ sender: UIViewController?) {
     if deviceIsiPad() {
         alert.popoverPresentationController?.sourceView = sender?.view
     }
-    (sender ?? UIApplication.shared.keyWindow?.rootViewController)?.showAlertController(alert)
+    (sender ?? UIApplication.shared.keyWindow?.rootViewController)?.showDetailViewController(alert, sender: nil)
 }
 
 func canAddModel(_ model: ZLPhotoModel, currentSelectCount: Int, sender: UIViewController?, showAlert: Bool = true) -> Bool {
@@ -199,24 +186,6 @@ func canAddModel(_ model: ZLPhotoModel, currentSelectCount: Int, sender: UIViewC
     return true
 }
 
-func ZLMainAsync(after: TimeInterval = 0, handler: @escaping (() -> Void)) {
-    if after > 0 {
-        DispatchQueue.main.asyncAfter(deadline: .now() + after) {
-            handler()
-        }
-    } else {
-        DispatchQueue.main.async {
-            handler()
-        }
-    }
-}
-
 func zl_debugPrint(_ message: Any...) {
 //    message.forEach { debugPrint($0) }
-}
-
-func zlLoggerInDebug(_ lastMessage: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) {
-    #if DEBUG
-        print("\(file):\(line): \(lastMessage())")
-    #endif
 }

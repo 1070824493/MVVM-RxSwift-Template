@@ -3,41 +3,51 @@ platform :ios, '13.0'
 source 'git@github.com:1070824493/Specs.git'
 source 'https://cdn.cocoapods.org/'
 use_frameworks!
-
+inhibit_all_warnings!
 workspace 'MainProject.xcworkspace'
+
+
+
+def pods_ModuleFoundation
+#  pod 'MikCore', :git => 'https://github.com/1070824493/MikCore.git', :branch => 'master'
+  pod 'MikCore', :path => '/Users/user/Documents/MikCore'
+end
+
+def pods_ModuleLogin
+
+end
+
+def pods_ModuleResource
+  pod 'R.swift', '~> 6.1.0'
+end
 
 # MARK: -- Target: MainProject
 target 'MainProject' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
+  pods_ModuleFoundation
+  pods_ModuleResource
 end
 
-def pods_ModuleFoundation
-#  pod 'MikCore'
-  pod 'MikCore', :git => 'https://github.com/1070824493/MikCore.git', :branch => 'master'
-end
-def pods_ModuleLogin
-
-end
-def pods_ModuleResource
-
-end
-
+# MARK: -- Target: ModuleFoundation
 target 'ModuleFoundation' do
 
   project 'ModuleFoundation/ModuleFoundation.xcodeproj'
   pods_ModuleFoundation
+  pods_ModuleResource
 end
 
-target 'ModuleLogin' do
-  project 'ModuleLogin/ModuleLogin.xcodeproj'
-end
-
+# MARK: -- Target: ModuleResource
 target 'ModuleResource' do
   project 'ModuleResource/ModuleResource.xcodeproj'
+  pods_ModuleResource
 end
 
+# MARK: -- Target: ModuleLogin
+target 'ModuleLogin' do
+  project 'ModuleLogin/ModuleLogin.xcodeproj'
+  pods_ModuleFoundation
+end
 
 
 

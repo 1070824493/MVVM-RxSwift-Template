@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE884AB227FEAC0F00F3A4FC /* ModuleFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = CE884AB127FEAC0F00F3A4FC /* ModuleFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEE53549281E7C3A008C08D7 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE53548281E7C3A008C08D7 /* Link.swift */; };
 		F2A567D687F29EDE20D6CFD8 /* Pods_ModuleFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D03C82EA101DC18FDC9699 /* Pods_ModuleFoundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -17,6 +18,7 @@
 		C3FE91AB5ECF768E9FD9D005 /* Pods-ModuleFoundation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModuleFoundation.release.xcconfig"; path = "Target Support Files/Pods-ModuleFoundation/Pods-ModuleFoundation.release.xcconfig"; sourceTree = "<group>"; };
 		CE884AAE27FEAC0F00F3A4FC /* ModuleFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ModuleFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE884AB127FEAC0F00F3A4FC /* ModuleFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModuleFoundation.h; sourceTree = "<group>"; };
+		CEE53548281E7C3A008C08D7 /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +62,18 @@
 		CE884AB027FEAC0F00F3A4FC /* ModuleFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				CEE53547281E7C31008C08D7 /* Link */,
 				CE884AB127FEAC0F00F3A4FC /* ModuleFoundation.h */,
 			);
 			path = ModuleFoundation;
+			sourceTree = "<group>";
+		};
+		CEE53547281E7C31008C08D7 /* Link */ = {
+			isa = PBXGroup;
+			children = (
+				CEE53548281E7C3A008C08D7 /* Link.swift */,
+			);
+			path = Link;
 			sourceTree = "<group>";
 		};
 		DC3FF358AD872D8728C7689E /* Pods */ = {
@@ -119,6 +130,7 @@
 				TargetAttributes = {
 					CE884AAD27FEAC0F00F3A4FC = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
 					};
 				};
 			};
@@ -180,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE53549281E7C3A008C08D7 /* Link.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +251,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -296,7 +309,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -312,6 +325,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A360BDB2B2342B93E8BBFBFC /* Pods-ModuleFoundation.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -322,6 +336,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,6 +347,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -341,6 +357,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C3FE91AB5ECF768E9FD9D005 /* Pods-ModuleFoundation.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -351,6 +368,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
